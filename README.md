@@ -4,10 +4,6 @@ Este projeto é um painel interativo desenvolvido com [Streamlit](https://stream
 
 ---
 
-## 🚀 Demonstração Online
-
-
----
 
 ## 🧠 O que você pode analisar:
 
