@@ -123,6 +123,14 @@ with aba2:
     fig = px.pie(mat_df, names='index', values='Matrículas', title="Distribuição por Nível de Ensino", hole=0.3)
     st.plotly_chart(fig, use_container_width=True)
 
+    # Novo gráfico de barras por UF
+    if "Total Alunos Educação Básica" in df_filtrado.columns:
+        alunos_uf = df_filtrado.groupby("UF")["Total Alunos Educação Básica"].sum().reset_index()
+        fig_uf = px.bar(alunos_uf, x="UF", y="Total Alunos Educação Básica",
+                        title="Total de Alunos da Educação Básica por UF",
+                        labels={"Total Alunos Educação Básica": "Total de Alunos"})
+        st.plotly_chart(fig_uf, use_container_width=True)
+        
 with aba3:
     st.header("Perfil dos Docentes")
     niveis_doc = {
