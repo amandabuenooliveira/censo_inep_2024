@@ -5,32 +5,6 @@ import plotly.express as px
 # Mova st.set_page_config para o início do script
 st.set_page_config(layout="wide")
 
-# CSS customizado com cores da identidade visual
-st.markdown("""
-    <style>
-        .main, .stApp {
-            background-color: #F7F9FA;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            color: #19286E;
-        }
-        .stTabs [role="tab"] {
-            background-color: #00B3A7;
-            color: white;
-            border-radius: 5px 5px 0 0;
-        }
-        .stTabs [role="tab"][aria-selected="true"] {
-            background-color: #19286E;
-            color: white;
-        }
-        .stMetricLabel, .stMetricValue {
-            color: #19286E;
-        }
-        .css-1d391kg {  /* sidebar header */
-            color: #4B7BF5 !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 # Paleta de Cores da Editora
 cores_marca = ['#93C83D', '#00B3A7', '#19286E', '#4B7BF5']
