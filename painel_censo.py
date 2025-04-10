@@ -151,3 +151,4 @@ with aba3:
     if 'Total Docentes' in df_filtrado.columns:
         total_doc = df_filtrado['Total Docentes'].sum()
         st.metric("Total de Docentes na Amostra", f"{total_doc:,}".replace(",", "."))
+
