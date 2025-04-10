@@ -5,6 +5,9 @@ import plotly.express as px
 # Mova st.set_page_config para o início do script
 st.set_page_config(layout="wide")
 
+# Paleta de Cores da Editora
+cores_marca = ['#93C83D', '#00B3A7', '#19286E', '#4B7BF5']
+
 colunas_mapping = {
     'ano_censo': 'Ano do Censo',
     'regiao': 'Região',
@@ -86,10 +89,10 @@ with aba1:
     escolas_por_regiao = df_filtrado.groupby("Região")["Código da Escola"].nunique().reset_index()
     fig_bar = px.bar(escolas_por_regiao, x="Região", y="Código da Escola",
                     title="Total de Escolas por Região",
-                    labels={"Código da Escola": "Número de Escolas"})
+                    labels={"Código da Escola": "Número de Escolas"},
+                    color_discrete_sequence=[cores_marca[2]])
     st.plotly_chart(fig_bar, use_container_width=True)
 
-    # Mapa aproximado por região
     regioes_coords = {
         'Norte': (-3.07, -60.02),
         'Nordeste': (-9.65, -35.71),
@@ -120,17 +123,18 @@ with aba2:
         'Matrículas Ensino Médio': 'Ensino Médio'
     }
     mat_df = df_filtrado[list(niveis.keys())].sum().rename(niveis).reset_index(name='Matrículas')
-    fig = px.pie(mat_df, names='index', values='Matrículas', title="Distribuição por Nível de Ensino", hole=0.3)
+    fig = px.pie(mat_df, names='index', values='Matrículas', title="Distribuição por Nível de Ensino", hole=0.3,
+                 color_discrete_sequence=cores_marca)
     st.plotly_chart(fig, use_container_width=True)
 
-    # Novo gráfico de barras por UF
     if "Total Alunos Educação Básica" in df_filtrado.columns:
         alunos_uf = df_filtrado.groupby("UF")["Total Alunos Educação Básica"].sum().reset_index()
         fig_uf = px.bar(alunos_uf, x="UF", y="Total Alunos Educação Básica",
                         title="Total de Alunos da Educação Básica por UF",
-                        labels={"Total Alunos Educação Básica": "Total de Alunos"})
+                        labels={"Total Alunos Educação Básica": "Total de Alunos"},
+                        color_discrete_sequence=[cores_marca[0]])
         st.plotly_chart(fig_uf, use_container_width=True)
-        
+
 with aba3:
     st.header("Perfil dos Docentes")
     niveis_doc = {
@@ -140,7 +144,8 @@ with aba3:
     }
     doc_df = df_filtrado[list(niveis_doc.keys())].sum().rename(niveis_doc).reset_index(name='Docentes')
     fig = px.bar(doc_df, x='index', y='Docentes', title="Total de Docentes por Etapa",
-                 labels={'index': 'Etapa de Ensino', 'Docentes': 'Quantidade'})
+                 labels={'index': 'Etapa de Ensino', 'Docentes': 'Quantidade'},
+                 color_discrete_sequence=[cores_marca[1]])
     st.plotly_chart(fig, use_container_width=True)
 
     if 'Total Docentes' in df_filtrado.columns:
